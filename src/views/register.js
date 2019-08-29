@@ -15,8 +15,8 @@ export default () => {
           <input class="input-login" id="txt-name-register" type="email" placeholder="Usuario" required>
           <input class="input-login" id="txt-email-register" type="text" placeholder="Email">
           <input class="input-login" id="txt-password-register" type="password" placeholder="Password">
-          <button class="btn-login" id="btn-toRegister" >Registrar</button>
           <label class="error-registra" id="txt-message-error-register"></label>
+          <button class="btn-login" id="btn-toRegister" >Registrar</button>
           <a class="" href="#/"><span id="register" class="bold">Iniciar Sesión</span></a>
         </form>
       </div>

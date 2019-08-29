@@ -9,10 +9,10 @@ export const functionRegisterClick = (event) => {
   functionRegister(txtEmailRegister, txtPasswordRegister)
     .then(() => {
       messageErrorRegister.classList.remove('show-message-error');
-      messageErrorRegister.innerHTML = '';
+      messageErrorRegister.innerHTML = 'Usuario Registrado';
       const user = userCurrent();
-      console.log(user);
-      window.location.hash = '#/';
+      // window.location.hash = '#/';
+
       firebase.firestore().collection('users').doc(user.uid).set({
         Usuario: name,
         Correo: txtEmailRegister,

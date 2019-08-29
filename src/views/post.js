@@ -1,14 +1,36 @@
 import { deletePostClick, editPostClick, likePostClick } from "../controller/post-controller.js";
 import { addCommentPost } from '../module/controllerdata.js';
-//import { listCommentPost } from '../views/post-comment.js';
+// import { listCommentPost } from '../views/post-comment.js';
 export const listPosts = (data) => {
   const containerOnePost = document.createElement('div');
- 
+
+  // Convertir la fecha
+  const fecha = new Date(data.timePost.toDate());
+  const day = fecha.getDate();
+  const month = fecha.getMonth() + 1;
+  const year = fecha.getFullYear();
+  const hour = fecha.getHours();
+  const minute = fecha.getMinutes();
+  var mesok = (month < 10) ? '0' + month : month;
+  var mesok=new Array(12);
+  mesok[0]="Enero";
+  mesok[1]="Febrero";
+  mesok[2]="Marzo";
+  mesok[3]="Abril";
+  mesok[4]="Mayo";
+  mesok[5]="Junio";
+  mesok[6]="Julio";
+  mesok[7]="Agosto";
+  mesok[8]="Septiembre";
+  mesok[9]="Octubre";
+  mesok[10]="Noviembre";
+  mesok[11]="Diciembre";
+
   const templateOnePost = `
       <div class="form-post1 container-list-post">
         <div class="post-article post-head border-box bg-blue ">
           <h4 class="name-post">${data.userName}</h4>
-          <p clas="txt-date">${data.timePost.toDate()}</p>
+          <p clas="txt-date">${day} ${'de'} ${mesok[month]} ${'del'} ${year} ${'|'} ${hour}${':'}${minute}</p>
         </div>
         
         <div class="form-post1">
@@ -79,16 +101,6 @@ export const listPosts = (data) => {
     btnLikePost.addEventListener('click', () => postLike[element](data));
   });
 
-
-  // console.log(data);
-  // const containerComentario = containerOnePost.querySelector('#comment-post');
-  // const callComments = (data) => {
-  // for (let i = 0; i < data.length; i++) {
-  //   console.log(data[i]);
-  //   containerComentario.appendChild(listCommentPost(data[i]));
-  // }
-  // };
-  // getCommentPost(data.id, callComments);
   
   
   // //pintar comentario

@@ -4,21 +4,32 @@ import { listPosts } from './post.js';
 import { userCurrent } from '../module/controllerdata.js';
 //import { listCommentPost } from './post-comment.js';
 
+
 export default (allPost) => {
+
+ 
   const containerHome = document.createElement('div');
   const templateHome = `
-    <div class="wrap">
-      <header class="bg-color-blue" >
-        <select class="mobile-navbar1">
-          <option class="mobile-navbar1" value=0>${userCurrent().displayName}</option> 
-        </select>
-        <button id="btn-menu" class="mobile-navbar btn-menu"><i class="fas fa-bars"></i></button>
-        <div id='nav2'> </div> 
-        <p class="title-header"> Easy Start </p>
-        <button id="logout" class="logout"><img src="img/logout2.png" class ="icon-header" alt=""></button>
+      <header>
+        <div class="contenedor-header">
+          <h1>Easy Start</h1>
+          <input type="checkbox" id="menu-bar">
+          <label for="menu-bar"><i class="fas fa-bars"></i></label>
+          <nav class="menu">
+            <a href="">${userCurrent().displayName}</a>
+            <a href="">Cesar Sesion</a>
+          </nav>
+        </div>
+
+        <!--<select class="mobile-navbar1">-->
+        <!--  <option class="mobile-navbar1" value=0>${userCurrent().displayName}</option> -->
+        <!--</select>-->
+        <!--<button id="btn-menu" class="mobile-navbar btn-menu"><i class="fas fa-bars"></i></button>-->
+        <!--<div id='nav2'> </div> -->
+        <!--<p class="title-header"> Easy Start </p>-->
+        <!--<button id="logout" class="logout"><img src="img/logout2.png" class ="icon-header " alt=""></button>-->
       
       </header>   
-    </div>
     <div class="two-column flex-r">
       <div class="column-post wall-feed margin-left" >
       <div class="form-post border-perfil">
@@ -51,16 +62,8 @@ export default (allPost) => {
       </div>
     </div>`;
   containerHome.innerHTML = templateHome;
-  const btnLogOut = containerHome.querySelector('#logout');
-  // menu movil
+  // const btnLogOut = containerHome.querySelector('#logout');
   
-  if (userCurrent().displayName) {
-    const btnNav = containerHome.querySelector('#btn-menu');
-    btnNav.addEventListener('click', ()=> {
-    const nav2 =containerHome.querySelector('#nav2');
-    nav2.appendChild(nav())
-  })
-  }
 
   // Imprimir todo las publicaciones dinamicamente
   console.log(allPost);
@@ -69,27 +72,10 @@ export default (allPost) => {
     containerListPost.appendChild(listPosts(allPost[i]));
   }
 
-
-
-
   // Publicar post
   const btnSharePost = containerHome.querySelector('#btn-share-post');
   btnSharePost.addEventListener('click', functionSharePost);
-  btnLogOut.addEventListener('click', logOutOnClick);
-  
+  // btnLogOut.addEventListener('click', logOutOnClick);
 
   return containerHome;
 };
-
-const  nav = () => {
-  let nav1 =
- ` <ul>
-    <li><a id='logout'>Cerrar Sesión</a></li>
-    </ul>`
- const nav =document.createElement('nav')
- nav.innerHTML = nav1;
- const btnLogout=nav.querySelector('#logout');
- btnLogout.addEventListener('click', logOutOnClick);
-
- return nav;
- }
