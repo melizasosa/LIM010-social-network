@@ -2,11 +2,9 @@
 export const functionRegister = (email, password) => {
   return firebase.auth().createUserWithEmailAndPassword(email, password);
 };
-
 export const singInLogin = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password);
 };
-
 export const signInFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
   return firebase.auth().signInWithPopup(provider);
@@ -21,7 +19,7 @@ export const logOut = () => firebase.auth().signOut();
 
 export const userCurrent = () => firebase.auth().currentUser;
 
-
+// guardamos los datos del usuario en la bd
 export const createUser = (id, name, email) => {
   firebase.firestore().collection('users').doc(id).set({
     idUsuario: id,
@@ -30,7 +28,7 @@ export const createUser = (id, name, email) => {
   });
 };
 
-
+// Post
 export const addPost = (newPost, id, userNombre, postState) => firebase.firestore().collection('posts').add({
   notes: newPost,
   user: id,
@@ -50,12 +48,12 @@ export const getPost = (callback) => {
       callback(data);
     });
 };
-
+//Eliminar Publicación
 export const deletePost = (id) => {
   return firebase.firestore().collection('posts').doc(id).delete();
 };
 // Editar Publicación
-export const editPost = (id, newTextPost) => {
+export const editNewPost = (id, newTextPost) => {
   return firebase.firestore().collection('posts').doc(id).update({
     notes: newTextPost,
   });
@@ -77,4 +75,22 @@ export const addCommentPost = (idPost, id,text) => {
 });
 };
 
+// export const addPost = (newPost, id, userNombre, postState) => {
+//   return firebase.firestore().collection('posts').add({
+//     notes: newPost,
+//     user: id,
+//     userName: userNombre,
+//     privacity: postState,
+//     like: 0,
+//     timePost: firebase.firestore.FieldValue.timePost(),//Devuelve un centinela para usar con set()o update()para incluir una marca de tiempo generada por el servidor en los datos escritos
+//   });
+// };
 
+// const addComment = (text, email, postId, id, date) => firebase.firestore().collection('Posts').doc(postId).collection('comment')
+//   .add({
+//     comentario: text,
+//     correo: email,
+//     idPost: postId,
+//     idUsuario: id,
+//     time: date,
+//   });

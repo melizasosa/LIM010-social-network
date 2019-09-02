@@ -7,5 +7,4 @@ export const components = {
   login: Login,
   register: Register,
   home: Home,
-
 };

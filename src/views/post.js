@@ -1,5 +1,5 @@
-import { deletePostClick,  likePostClick, editNewPost } from "../controller/post-controller.js";
-import { addCommentPost, userCurrent } from '../module/controllerdata.js';
+import { deletePostClick, likePostClick, editNewPost } from "../controller/post-controller.js";
+import { addCommentPost } from '../module/controllerdata.js';
 
 export const listPosts = (data) => {
   const containerOnePost = document.createElement('div');
@@ -47,6 +47,8 @@ export const listPosts = (data) => {
           <span id="like-count">${data.like}</span>
         </div>
 
+
+
         <div id="confirm-delete-view" class="modal">
           <div class="modal-content">
             <p>¿Deseas eliminar la publicación?</p>
@@ -54,6 +56,13 @@ export const listPosts = (data) => {
             <button id="no-delete-post" class="btn-edit">No</button>
           </div>
         </div>
+        <!--<div id="text-edit-view" class="modal">
+          <div class="modal-content">
+            <button id="close-post"> &times </button>
+            <button class="btn-edit" id="edit-post-${data.id}">Guardar</button>
+            <textarea id="text-edit" cols="60" rows="5">${data.notes}</textarea>
+          </div>
+        </div>-->
         </div>
         <div id="comments" class="form-post1  ">
             <div class=""> 
@@ -70,7 +79,7 @@ export const listPosts = (data) => {
    viewConfirmDelete.style.display = 'block';
   });
   
-  // editar post
+  // editar
   const btnEdit = containerOnePost.querySelector(`#edit-${data.id}`);
   btnEdit.addEventListener('click', () => {
     containerOnePost.querySelector(`#text-${data.id}`).disabled = false;
@@ -95,6 +104,15 @@ export const listPosts = (data) => {
     viewConfirmDelete.style.display = 'none';
   });
 
+  const postLike = {
+    '#like-post': likePostClick,
+  };
+  Object.keys(postLike).forEach((element) => {
+    const btnLikePost = containerOnePost.querySelector(element)
+    btnLikePost.addEventListener('click', () => postLike[element](data));
+  });
+
+
 // Agregar comentario en la sub coleccion
   const btnComment = containerOnePost.querySelector('#btn-comment')
   btnComment.addEventListener('click', ()=>{
@@ -109,13 +127,6 @@ export const listPosts = (data) => {
   });
   }) ;
 
-  const postLike = {
-    '#like-post': likePostClick,
-  };
-  Object.keys(postLike).forEach((element) => {
-    const btnLikePost = containerOnePost.querySelector(element)
-    btnLikePost.addEventListener('click', () => postLike[element](data));
-  });
 
  // }
   return containerOnePost;

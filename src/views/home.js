@@ -1,21 +1,26 @@
+//import { logOutOnClick } from '../controller/login-controller.js';
 import { functionSharePost } from '../controller/post-controller.js';
 import { listPosts } from './post.js';
 import { userCurrent } from '../module/controllerdata.js';
-//import { infUser } from '../controller/observador-controller.js';
+//import { listCommentPost } from './post-comment.js';
+
 
 export default (allPost) => {
+
+ 
+  const containerHome = document.createElement('div');
   const templateHome = `
-    <header>
-      <div class="contenedor-header">
-        <h1>Easy Start</h1>
-        <input type="checkbox" id="menu-bar">
-        <label for="menu-bar"><i class="fas fa-bars"></i></label>
-        <nav class="menu">
-          <a href="">${userCurrent().displayName}</a>
-          <a href="#/">Cesar Sesion</a>
-        </nav>
-      </div>
-    </header>   
+      <header>
+        <div class="contenedor-header">
+          <h1>Easy Start</h1>
+          <input type="checkbox" id="menu-bar">
+          <label for="menu-bar"><i class="fas fa-bars"></i></label>
+          <nav class="menu">
+            <a href="">${userCurrent().displayName}</a>
+            <a href="#/">Cesar Sesion</a>
+          </nav>
+        </div>
+      </header>   
     <div class="two-column flex-r">
       <div class="column-post wall-feed margin-left" >
       <div class="form-post border-perfil">
@@ -47,11 +52,14 @@ export default (allPost) => {
       <div class="wall-feed margin-left " id="container-list-post">
       </div>
     </div>`;
-  
-  const containerHome = document.createElement('div');
   containerHome.innerHTML = templateHome;
+  // const divElem = document.createElement('div');
+  // divElem.innerHTML = viewHome;
   const userName = containerHome.querySelector('#name');
   const userCorreo = containerHome.querySelector('#correo');
+
+  //const btnLogOut = containerHome.querySelector('#logout');
+
 
   // Imprimir todo las publicaciones dinamicamente
   console.log(allPost);
@@ -60,11 +68,17 @@ export default (allPost) => {
     containerListPost.appendChild(listPosts(allPost[i]));
   }
 
+
+
+
   // Publicar post
   const btnSharePost = containerHome.querySelector('#btn-share-post');
   btnSharePost.addEventListener('click', functionSharePost);
 
-  //infUser(userName, userCorreo); // pinta en el home esos datos de argumento
+  //   const btnLogout=nav.querySelector('#logout');
+//   btnLogout.addEventListener('click', logOutOnClick);
+  // btnLogOut.addEventListener('click', logOutOnClick);
+  //obtenerInfo(userName, userCorreo); // pinta en el home esos datos de argumento
   
   return containerHome;
 };

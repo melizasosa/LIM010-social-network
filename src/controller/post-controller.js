@@ -1,4 +1,4 @@
-import { userCurrent, addPost, deletePost, editPost, likesPost, likesPostCount} from '../module/controllerdata.js';
+import { userCurrent, addPost, deletePost, likesPost, likesPostCount} from '../module/controllerdata.js';
 
 // Funcion para agregar a la base de datos el post
 export const functionSharePost = (event) => {
