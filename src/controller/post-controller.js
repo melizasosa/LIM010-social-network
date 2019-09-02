@@ -1,11 +1,12 @@
 import { userCurrent, addPost, deletePost, editPost, likesPost, likesPostCount} from '../module/controllerdata.js';
 
-// agregar un post en la bd
+// Funcion para agregar a la base de datos el post
 export const functionSharePost = (event) => {
   event.preventDefault();
   const txtPost = document.getElementById('txt-new-post').value;
   const postState = document.getElementById('post-state').value;
   const user = userCurrent();
+  console.log(user);
   let countLike = 0;
   addPost(txtPost, user.uid, user.displayName, postState,countLike)
     .then(() => {
@@ -15,6 +16,7 @@ export const functionSharePost = (event) => {
       console.log('error de adding documt', error);
     });
 };
+
 
 // guardar en un array la data para agregar la propiedad id en el objeto--para llamar en la ruta
 export const getPosts = (dataPost) => {
@@ -26,7 +28,21 @@ export const getPosts = (dataPost) => {
       });
     }); 
 };
-//Eliminar Post
+
+// Funcion para editar un post
+export const editNewPost = (id, newtextPost) => firebase.firestore().collection('posts')
+  .doc(id)
+  .update({
+    notes: newtextPost,
+  })
+  .then(() => {
+    console.log('Document successfully updated!');
+  })
+  .catch((error) => {
+    console.error('Error updating document: ', error);
+  });
+
+//Funcion para eliminar un post
 export const deletePostClick = (id) => {
   deletePost(id.id)
     .then(() => {
@@ -35,11 +51,6 @@ export const deletePostClick = (id) => {
       console.error('Error adding document: ', error);
     });
    
-};
-// Editar Post
-export const editPostClick = (id) => { 
-    let newtextPost= document.querySelector('#text-edit');
-    editPost(id.id, newtextPost.value);
 };
 
 // Likes de Post

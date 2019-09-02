@@ -1,24 +1,21 @@
-import { logOutOnClick } from '../controller/login-controller.js';
 import { functionSharePost } from '../controller/post-controller.js';
 import { listPosts } from './post.js';
 import { userCurrent } from '../module/controllerdata.js';
-//import { listCommentPost } from './post-comment.js';
+//import { infUser } from '../controller/observador-controller.js';
 
 export default (allPost) => {
-  const containerHome = document.createElement('div');
   const templateHome = `
-    <div class="wrap">
-      <header class="bg-color-blue" >
-        <select class="mobile-navbar1">
-          <option class="mobile-navbar1" value=0>${userCurrent().displayName}</option> 
-        </select>
-        <button id="btn-menu" class="mobile-navbar btn-menu"><i class="fas fa-bars"></i></button>
-        <div id='nav2'> </div> 
-        <p class="title-header"> Easy Start </p>
-        <button id="logout" class="logout"><img src="img/logout2.png" class ="icon-header" alt=""></button>
-      
-      </header>   
-    </div>
+    <header>
+      <div class="contenedor-header">
+        <h1>Easy Start</h1>
+        <input type="checkbox" id="menu-bar">
+        <label for="menu-bar"><i class="fas fa-bars"></i></label>
+        <nav class="menu">
+          <a href="">${userCurrent().displayName}</a>
+          <a href="#/">Cesar Sesion</a>
+        </nav>
+      </div>
+    </header>   
     <div class="two-column flex-r">
       <div class="column-post wall-feed margin-left" >
       <div class="form-post border-perfil">
@@ -33,7 +30,7 @@ export default (allPost) => {
       <div class="wall-feed margin-left " >
         <div class="form-post">
           <form>
-            <input type="text" id="txt-new-post" class="input-post" placeholder="¿Qué quieres compartir?">
+          <textarea  type="text" id="txt-new-post" class="input-post" placeholder="¿Qué quieres compartir?"></textarea>  
           </form>
           <div class="btn-comment">
             <form class="btn-comment-right">
@@ -50,17 +47,11 @@ export default (allPost) => {
       <div class="wall-feed margin-left " id="container-list-post">
       </div>
     </div>`;
-  containerHome.innerHTML = templateHome;
-  const btnLogOut = containerHome.querySelector('#logout');
-  // menu movil
   
-  if (userCurrent().displayName) {
-    const btnNav = containerHome.querySelector('#btn-menu');
-    btnNav.addEventListener('click', ()=> {
-    const nav2 =containerHome.querySelector('#nav2');
-    nav2.appendChild(nav())
-  })
-  }
+  const containerHome = document.createElement('div');
+  containerHome.innerHTML = templateHome;
+  const userName = containerHome.querySelector('#name');
+  const userCorreo = containerHome.querySelector('#correo');
 
   // Imprimir todo las publicaciones dinamicamente
   console.log(allPost);
@@ -69,27 +60,11 @@ export default (allPost) => {
     containerListPost.appendChild(listPosts(allPost[i]));
   }
 
-
-
-
   // Publicar post
   const btnSharePost = containerHome.querySelector('#btn-share-post');
   btnSharePost.addEventListener('click', functionSharePost);
-  btnLogOut.addEventListener('click', logOutOnClick);
-  
 
+  //infUser(userName, userCorreo); // pinta en el home esos datos de argumento
+  
   return containerHome;
 };
-
-const  nav = () => {
-  let nav1 =
- ` <ul>
-    <li><a id='logout'>Cerrar Sesión</a></li>
-    </ul>`
- const nav =document.createElement('nav')
- nav.innerHTML = nav1;
- const btnLogout=nav.querySelector('#logout');
- btnLogout.addEventListener('click', logOutOnClick);
-
- return nav;
- }

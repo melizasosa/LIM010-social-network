@@ -4,11 +4,11 @@ import
 }
   from '../module/controllerdata.js';
 
-
+// AUTENTIFICACION CON CORREO REGISTRADO
 export const singInLoginClick = (event) => {
   event.preventDefault();
-  const email = event.target.email.value;
-  const password = event.target.password.value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
   const menssageErrorLogin = document.getElementById('txt-message-error-login');
   return singInLogin(email, password)
     .then(() => {
@@ -35,6 +35,7 @@ export const singInLoginClick = (event) => {
     });
 };
 
+// AUTENTIFICACION CON CUENTA DE FACEBOOK
 export const signInFacebookClick = (event) => {
   event.preventDefault();
   signInFacebook()
@@ -55,6 +56,7 @@ export const signInFacebookClick = (event) => {
     });
 };
 
+// AUTENTIFICACION CON CUENTA DE GOOGLE
 export const signInGoogleClick = (event) => {
   event.preventDefault();
   return signInGoogle()
@@ -74,8 +76,7 @@ export const signInGoogleClick = (event) => {
     });
 };
 
-
-
+// CERRAR SESION 
 export const logOutOnClick = (event) => {
   event.preventDefault();
   logOut()

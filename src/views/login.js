@@ -30,12 +30,13 @@ export default () => {
     </div>`;
   containerLogin.innerHTML = templateLogin;
   containerLogin.setAttribute('class', 'two-column flex-r');
-  const authenticationEmailClick = containerLogin.querySelector('#form-authentication');
+  //const authenticationEmailClick = containerLogin.querySelector('#form-authentication');
+  const authenticationEmailClick = containerLogin.querySelector('#btn-login');
   const authenticationFacebook = containerLogin.querySelector('#btn-facebook');
   const authenticationGoogle = containerLogin.querySelector('#btn-google');
   const showEye = containerLogin.querySelector('#show-eye');
 
-  authenticationEmailClick.addEventListener('submit', singInLoginClick);
+  authenticationEmailClick.addEventListener('click', singInLoginClick);
   authenticationFacebook.addEventListener('click', signInFacebookClick);
   authenticationGoogle.addEventListener('click', signInGoogleClick);
   showEye.addEventListener('click', showPassword);

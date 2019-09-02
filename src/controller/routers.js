@@ -1,7 +1,7 @@
 import { components } from '../views/components.js';
 import { getPost } from '../module/controllerdata.js';
 
-// rutas
+// funcion para asociar el nombre de la ruta con el componente
 export const changeView = (routers) => {
   const containerGlobal = document.getElementById('container-global');
   containerGlobal.innerHTML = '';
@@ -11,7 +11,6 @@ export const changeView = (routers) => {
     case '#/register': containerGlobal.appendChild(components.register());
       break;
     case '#/home':
-      // eslint-disable-next-line no-case-declarations
       const callback = (objData) => {
         containerGlobal.innerHTML = '';
         containerGlobal.appendChild(components.home(objData));
