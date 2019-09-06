@@ -61,7 +61,6 @@ export const signInGoogleClick = (event) => {
   return signInGoogle()
     .then(() => {
       const user = userCurrent();
-      // console.log(user);
       firebase.firestore().collection('users').doc(user.uid).set({
         idUsuario: user.uid,
         Nombre: user.displayName,
