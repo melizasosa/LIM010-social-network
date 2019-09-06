@@ -1,8 +1,8 @@
 // configuracion de mock de firebase
 // iniciando tests
 import {
-  singInLogin, signInFacebook, signInGoogle, logOut, functionRegister,
-} from '../src/firebase/controllerdata.js';
+  singInLogin, signInFacebook, signInGoogle, functionRegister,
+} from '../src/module/controllerdata.js';
 
 const firebasemock = require('firebase-mock');
 
@@ -49,10 +49,10 @@ describe('sesion iniciada', () => {
     }));
 });
 
-// Cesar sesión
-describe('sesion cerrada', () => {
-  it('deberia poder cerrar sesion', () => logOut()
-    .then(() => {
-      expect(firebase.auth().currentUser).toBe(null);
-    }));
-});
+// // Cesar sesión
+// describe('sesion cerrada', () => {
+//   it('deberia poder cerrar sesion', () => logOut()
+//     .then(() => {
+//       expect(firebase.auth().currentUser).toBe(null);
+//     }));
+// });
