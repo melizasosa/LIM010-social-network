@@ -1,13 +1,8 @@
-import { logOutOnClick } from '../controller/login-controller.js';
 import { functionSharePost } from '../controller/post-controller.js';
 import { listPosts } from './post.js';
-import { userCurrent } from '../module/controllerdata.js';
-//import { listCommentPost } from './post-comment.js';
-
+import { dataUser } from '../controller/register-controller.js';
 
 export default (allPost) => {
-
- 
   const containerHome = document.createElement('div');
   const templateHome = `
       <header>
@@ -16,27 +11,18 @@ export default (allPost) => {
           <input type="checkbox" id="menu-bar">
           <label for="menu-bar"><i class="fas fa-bars"></i></label>
           <nav class="menu">
-            <a href="">${userCurrent().displayName}</a>
-            <a href="">Cesar Sesion</a>
+            <a href="" id="name-menu"></a>
+            <a href="#/">Cerrar Sesion</a>
           </nav>
         </div>
-
-        <!--<select class="mobile-navbar1">-->
-        <!--  <option class="mobile-navbar1" value=0>${userCurrent().displayName}</option> -->
-        <!--</select>-->
-        <!--<button id="btn-menu" class="mobile-navbar btn-menu"><i class="fas fa-bars"></i></button>-->
-        <!--<div id='nav2'> </div> -->
-        <!--<p class="title-header"> Easy Start </p>-->
-        <!--<button id="logout" class="logout"><img src="img/logout2.png" class ="icon-header " alt=""></button>-->
-      
       </header>   
-    <div class="two-column flex-r">
+    <div class="two-column flex-r ">
       <div class="column-post wall-feed margin-left" >
       <div class="form-post border-perfil">
-        <img class="foto-user" id="foto" src="${userCurrent().photoURL}" />
+        <img class="foto-user" id="foto" src="./img/logo-user.png" />
         <div class="datos">
-          <label  id="name" for="name">${userCurrent().displayName}</label>
-          <label id="correo" for="name">${userCurrent().email}</label>
+          <label  id="name" for="name"></label>
+          <label id="correo" for="name"></label>
         </div>
         </div>
       </div>
@@ -44,7 +30,7 @@ export default (allPost) => {
       <div class="wall-feed margin-left " >
         <div class="form-post">
           <form>
-            <input type="text" id="txt-new-post" class="input-post" placeholder="¿Qué quieres compartir?">
+          <textarea  type="text" id="txt-new-post" class="input-post" placeholder="¿Qué quieres compartir?"></textarea>  
           </form>
           <div class="btn-comment">
             <form class="btn-comment-right">
@@ -62,12 +48,16 @@ export default (allPost) => {
       </div>
     </div>`;
   containerHome.innerHTML = templateHome;
+  const userName = containerHome.querySelector('#name');
+  const userNameMenu = containerHome.querySelector('#name-menu');
+  const userCorreo = containerHome.querySelector('#correo');
+
   // const btnLogOut = containerHome.querySelector('#logout');
-  
+  dataUser(userName, userCorreo, userNameMenu);
 
   // Imprimir todo las publicaciones dinamicamente
-  console.log(allPost);
   const containerListPost = containerHome.querySelector('#container-list-post');
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < allPost.length; i++) {
     containerListPost.appendChild(listPosts(allPost[i]));
   }
@@ -75,7 +65,6 @@ export default (allPost) => {
   // Publicar post
   const btnSharePost = containerHome.querySelector('#btn-share-post');
   btnSharePost.addEventListener('click', functionSharePost);
-  // btnLogOut.addEventListener('click', logOutOnClick);
 
   return containerHome;
 };
