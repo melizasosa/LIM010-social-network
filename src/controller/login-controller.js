@@ -76,15 +76,6 @@ export const signInGoogleClick = (event) => {
     });
 };
 
-// CERRAR SESION
-// export const logOutOnClick = (event) => {
-//   event.preventDefault();
-//   logOut()
-//     .then(() => {
-//       window.location.hash = '#/';
-//     });
-// };
-
 export const showPassword = () => {
   const typePass = document.querySelector('#password');
   if (typePass.type === 'password') {
