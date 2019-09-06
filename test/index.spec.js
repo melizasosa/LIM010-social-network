@@ -1,6 +1,8 @@
 // configuracion de mock de firebase
 // iniciando tests
-import { singInLogin, signInFacebook, signInGoogle, functionRegister } from '../src/module/controllerdata.js';
+import {
+  singInLogin, signInFacebook, signInGoogle, functionRegister,
+} from '../src/module/controllerdata.js';
 
 const firebasemock = require('firebase-mock');
 

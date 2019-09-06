@@ -33,16 +33,18 @@ export const functionRegisterClick = (event) => {
       }
     });
 };
-
-export const dataUser = (name, email, name1) => firebase.auth().onAuthStateChanged((user) => {
+// eslint no-param-reassign: 'error'
+export const dataUser = (name, email, nameMenu) => firebase.auth().onAuthStateChanged((user) => {
+  const nameUser = name;
+  const emailUser = email;
+  const nameMenuUser = nameMenu;
   if (user) {
     firebase.firestore().collection('users').where('idUsuario', '==', userCurrent().uid).get()
       .then((result) => {
         result.forEach((doc) => {
-          console.log(doc.data().Nombre);
-          name.textContent = doc.data().Nombre;
-          email.textContent = doc.data().Email;
-          name1.textContent = doc.data().Nombre;
+          nameUser.textContent = doc.data().Nombre;
+          emailUser.textContent = doc.data().Email;
+          nameMenuUser.textContent = doc.data().Nombre;
         });
       });
   }

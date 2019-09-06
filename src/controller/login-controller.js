@@ -15,7 +15,6 @@ export const singInLoginClick = (event) => {
       menssageErrorLogin.classList.remove('show-message-error');
       menssageErrorLogin.innerHTML = '';
       window.location.hash = '#/home';
-
     })
     .catch((error) => {
       menssageErrorLogin.classList.add('show-message-error');
@@ -41,7 +40,6 @@ export const signInFacebookClick = (event) => {
   signInFacebook()
     .then(() => {
       const user = userCurrent();
-      console.log(user);
       firebase.firestore().collection('users').doc(user.uid).set({
         idUsuario: user.uid,
         Nombre: user.displayName,
@@ -78,7 +76,7 @@ export const signInGoogleClick = (event) => {
     });
 };
 
-// CERRAR SESION 
+// CERRAR SESION
 // export const logOutOnClick = (event) => {
 //   event.preventDefault();
 //   logOut()

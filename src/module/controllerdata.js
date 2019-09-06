@@ -1,10 +1,8 @@
 // Autentificación
-export const functionRegister = (email, password) => {
-  return firebase.auth().createUserWithEmailAndPassword(email, password);
-};
-export const singInLogin = (email, password) => {
-  return firebase.auth().signInWithEmailAndPassword(email, password);
-};
+// eslint-disable-next-line max-len
+export const functionRegister = (email, password) => firebase.auth().createUserWithEmailAndPassword(email, password);
+// eslint-disable-next-line max-len
+export const singInLogin = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password);
 export const signInFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
   return firebase.auth().signInWithPopup(provider);
@@ -29,14 +27,13 @@ export const createUser = (id, name, email) => {
 };
 
 // Post
-export const addPost = (newPost, id, userNombre, postState, email, likes) => firebase.firestore().collection('posts').add({
+export const addPost = (newPost, id, postState, email, likes) => firebase.firestore().collection('posts').add({
   notes: newPost,
   idUser: id,
-  userName: userNombre,
   privacity: postState,
+  emailUser: email,
   like: likes,
   timePost: new Date(),
-  emailUser: email,
 });
 
 export const getPost = (callback) => {
@@ -47,25 +44,28 @@ export const getPost = (callback) => {
         data.push({ id: doc.id, ...doc.data() });
       });
       callback(data);
-      
     });
 };
 // Eliminar Publicación
-export const deletePost = (id) => {
-  return firebase.firestore().collection('posts').doc(id).delete();
-};
+export const deletePost = id => firebase.firestore().collection('posts').doc(id).delete();
 // Editar Publicación
-export const editPost = (idPost, newTextPost) => {
-  return firebase.firestore().collection('posts').doc(idPost).update({
+export const editPost = (idPost, newTextPost, newPostState) => {
+  const obj = {
     notes: newTextPost,
-  });
+    privacity: newPostState,
+  };
+  return firebase.firestore().collection('posts').doc(idPost).update(obj);
 };
 // Likes y Contador
+
 export const likesPost = id => firebase.firestore().collection('posts').doc(id).get();
+
 export const likesPostCount = (id, likes) => {
-  return firebase.firestore().collection('posts').doc(id).update({
-  like: likes += 1,
-  });
+  let likesPosts = likes;
+  const obj = {
+    like: likesPosts += 1,
+  };
+  return firebase.firestore().collection('posts').doc(id).update(obj);
 };
 
 // agregar comentario

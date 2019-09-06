@@ -1,4 +1,6 @@
-import { userCurrent, addPost, deletePost, editPost, likesPost, likesPostCount} from '../module/controllerdata.js';
+import {
+  userCurrent, addPost, deletePost, editPost, likesPost, likesPostCount,
+} from '../module/controllerdata.js';
 
 // agregar un post en la bd
 export const functionSharePost = (event) => {
@@ -7,31 +9,16 @@ export const functionSharePost = (event) => {
   const postState = document.getElementById('post-state').value;
 
   const user = userCurrent();
-  console.log(user);
   const countLike = 0;
-  addPost(txtPost, user.uid, user.displayName, postState, user.email, countLike)
+  addPost(txtPost, user.uid, postState, user.email, countLike)
     .then(() => {
-      console.log(user.email);
       document.getElementById('txt-new-post').value = '';
-      // alert('Post agregado');
     });
 };
 
-
-// guardar en un array la data para agregar la propiedad id en el objeto--para llamar en la ruta
-export const getPosts = (dataPost) => {
-  firebase.firestore().collection('posts')
-    .onSnapshot((querySnapshot) => {
-      // const data = [];
-      querySnapshot.forEach((doc) => {
-        dataPost({ id: doc.id, ...doc.data() });
-      });
-    }); 
-};
-
 // editar
-export const editPost1 = (idPost, newtextPost) => { 
-  editPost(idPost, newtextPost)
+export const editPost1 = (idPost, newtextPost, newPostState) => {
+  editPost(idPost, newtextPost, newPostState)
     .then(() => {
     // console.log('Document written with ID: ', docRef.id);
     }).catch(() => {
@@ -44,15 +31,9 @@ export const deletePostClick = (id) => {
   deletePost(id.id)
     .then(() => {
       // console.log('Document written with ID: ', docRef.id);
-    }).catch((error) => {
+    }).catch(() => {
       // console.error('Error adding document: ', error);
     });
-   
-};
-// Editar Post
-export const editPostClick = (id) => { 
-  let newtextPost= document.querySelector('#text-edit');
-  editPost(id.id, newtextPost.value);
 };
 
 // Likes de Post
@@ -60,15 +41,21 @@ export const likePostClick = (id) => {
   likesPost(id.id)
     .then((result) => {
       const seeCount = result.data().like;
-      // console.log(seeCount);
-      return  seeCount;
-     
+      return seeCount;
     }).catch(() => {});
-  
-  let likePostCountshow = document.getElementById('like-count');
+  const likePostCountshow = document.getElementById('like-count');
   likePostCountshow.innerHTML = likesPostCount(id.id, id.like);
 };
 
+// export const postUser = (content1) => {
+//   const contentPost = content1.querySelector('#content-post');
+//   firebase.auth().onAuthStateChanged((user) => {
+//       showPostUser((myPostnotes) => {
+//       contentPost.innerHTML = '';
+//       contentPost.appendChild(myPost(myPostnotes));
+//     });
+//   });
+// };
 
 // // agregar un comentario en la bd
 // export const functionShareComment = (event) => {

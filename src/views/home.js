@@ -1,6 +1,5 @@
 import { functionSharePost } from '../controller/post-controller.js';
 import { listPosts } from './post.js';
-import { userCurrent } from '../module/controllerdata.js';
 import { dataUser } from '../controller/register-controller.js';
 
 export default (allPost) => {
@@ -12,12 +11,12 @@ export default (allPost) => {
           <input type="checkbox" id="menu-bar">
           <label for="menu-bar"><i class="fas fa-bars"></i></label>
           <nav class="menu">
-            <a href="" id="name1"></a>
-            <a href="#/">Cesar Sesion</a>
+            <a href="" id="name-menu"></a>
+            <a href="#/">Cerrar Sesion</a>
           </nav>
         </div>
       </header>   
-    <div class="two-column flex-r">
+    <div class="two-column flex-r ">
       <div class="column-post wall-feed margin-left" >
       <div class="form-post border-perfil">
         <img class="foto-user" id="foto" src="./img/logo-user.png" />
@@ -50,11 +49,11 @@ export default (allPost) => {
     </div>`;
   containerHome.innerHTML = templateHome;
   const userName = containerHome.querySelector('#name');
-  const userName1 = containerHome.querySelector('#name1');
+  const userNameMenu = containerHome.querySelector('#name-menu');
   const userCorreo = containerHome.querySelector('#correo');
 
   // const btnLogOut = containerHome.querySelector('#logout');
-  dataUser(userName, userCorreo, userName1);
+  dataUser(userName, userCorreo, userNameMenu);
 
   // Imprimir todo las publicaciones dinamicamente
   const containerListPost = containerHome.querySelector('#container-list-post');
