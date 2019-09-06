@@ -1,6 +1,6 @@
 import MockFirebase from 'mock-cloud-firestore';
 import {
-  addPost, getPost, deletePost, editPost,
+  addPost, getPost, deletePost, editPost, likesPost, likesPostCount,
 } from '../src/module/controllerdata.js';
 
 const fixtureData = {
@@ -58,6 +58,29 @@ describe('edit post', () => {
       (data) => {
         const result = data.find(posts => posts.notes === '¿que tipo de empresa tiene?');
         expect(result.notes).toBe('¿que tipo de empresa tiene?', 'privado');
+        done();
+      },
+    )));
+});
+
+// TEST DE LIKE POST
+describe('Like post', () => {
+  it('Debería ver el like  del post con id:1234', done => likesPost('1234', '0')
+    .then(() => getPost(
+      (data) => {
+        const result = data.find(posts => posts.like === '0');
+        expect(result.like).toBe('0');
+        done();
+      },
+    )));
+});
+
+describe('like post count', () => {
+  it('Debería dar like al post con id:1234', done => likesPostCount('1234', '')
+    .then(() => getPost(
+      (data) => {
+        const result = data.find(posts => posts.like === '1');
+        expect(result.like).toBe('1');
         done();
       },
     )));

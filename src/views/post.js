@@ -32,13 +32,9 @@ export const listPosts = (data) => {
           <button id='confirm-delete'><i class='fas fa-trash-alt'></i></button>
           <button id='edit-${data.id}' class='btn-share'><i class='fas fa-edit'></i>Editar</button>
           <button type='button' id='edit-post' class='btn-save'>Guardar</button>
-
           <button id='like-post'><i class='fab fa-gratipay'></i></button>
           <span id='like-count'>${data.like}</span>
         </div>
-
-
-
         <div id='confirm-delete-view' class='modal'>
           <div class='modal-content'>
             <p>¿Deseas eliminar la publicación?</p>
